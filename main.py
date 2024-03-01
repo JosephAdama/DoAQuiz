@@ -20,12 +20,12 @@ def is_valid_cidr(cidr):
         return False
 
 
-def Divide_Subnet(ip, division, part):
+def Divide_Subnet(ip, divisor, part):
     ip_parts = ip.split('/')
     ip_address = ip_parts[0]
     cidr = int(ip_parts[1])
 
-    res_division = int(2 ** (division - 1).bit_length())
+    res_division = int(2 ** (divisor - 1).bit_length())
     host_b = int(32 - cidr - math.log2(res_division))
     new_cidr = int(32 - host_b)
 
@@ -81,13 +81,13 @@ if __name__ == '__main__':
 
         if choice == '1':
             ip = input("Enter IP address and CIDR (e.g., 175.83.224.0/20): ")
-            division = input("Enter division: ")
-            part = input("Enter part: ")
+            divisor = input("Enter divisor (by what is the Subnet being divided?): ")
+            part = input("Enter part (which Part do you need for the result): ")
 
-            if is_valid_ip(ip) and division.isdigit() and part.isdigit():
-                print(f"The Subnet is {Divide_Subnet(ip, int(division), int(part))}\n\n")
+            if is_valid_ip(ip) and divisor.isdigit() and part.isdigit():
+                print(f"The Subnet is {Divide_Subnet(ip, int(divisor), int(part))}\n\n")
             else:
-                print("Invalid input. Please enter a valid IP address, CIDR, and numeric values for division and "
+                print("Invalid input. Please enter a valid IP address, CIDR, and numeric values for divisor and "
                       "part.\n")
 
         elif choice == '2':
